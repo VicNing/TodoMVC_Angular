@@ -69,7 +69,7 @@ app.controller('MainController', ['$scope', function ($scope) {
 		}
 	}
 	$scope.toggle = function () {
-		this.todos.forEach((todo, index)=> {
+		this.todos.forEach((todo, index) => {
 			todo.status = this.checkAll;
 		});
 	};

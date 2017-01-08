@@ -2,3 +2,5 @@ dist/
 src/cache/
 node_modules/
 .editorconfig
+.vscode/
+test.*
