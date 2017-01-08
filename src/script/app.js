@@ -38,7 +38,7 @@ app.controller('MainController', ['$scope', function ($scope) {
 			));
 			this.input = '';
 		}
-	}
+	};
 	$scope.remove = function (todo) {
 		let index = this.todos.indexOf(todo);
 		this.todos.splice(index, 1);
@@ -67,7 +67,7 @@ app.controller('MainController', ['$scope', function ($scope) {
 		if ($event.key === 'Enter' && todo.task) {
 			todo.editing = false;
 		}
-	}
+	};
 	$scope.toggle = function () {
 		this.todos.forEach((todo, index) => {
 			todo.status = this.checkAll;
