@@ -42,13 +42,13 @@
 			<!-- Remove this if you don't implement routing -->
 			<ul class="filters">
 				<li>
-					<a ng-class="{selected:$location.hash()==='/' || $location.hash()===''}" href="#/">All</a>
+					<a ng-class="{selected:$location.hash()==='/' || $location.hash()===''}" ng-href="#/">All</a>
 				</li>
 				<li>
-					<a ng-class="{selected:$location.hash()==='/active'}" href="#/active">Active</a>
+					<a ng-class="{selected:$location.hash()==='/active'}" ng-href="#/active">Active</a>
 				</li>
 				<li>
-					<a ng-class="{selected:$location.hash()==='/completed'}" href="#/completed">Completed</a>
+					<a ng-class="{selected:$location.hash()==='/completed'}" ng-href="#/completed">Completed</a>
 				</li>
 			</ul>
 			<!-- Hidden if no completed items are left ↓ -->
