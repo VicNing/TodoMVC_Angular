@@ -12,61 +12,58 @@
 </head>
 
 <body ng-app="app" ng-controller="MainController" ng-cloak>
-<section class="todoapp">
-	<header class="header">
-		<h1>todos</h1>
-		<input class="new-todo" placeholder="What needs to be done?" autofocus ng-model="input"
-			   ng-keypress="add($event)">
-	</header>
-	<!-- This section should be hidden by default and shown when there are todos -->
-	<section class="main">
-		<input class="toggle-all" type="checkbox" ng-model="checkAll" ng-change="toggle()">
-		<label for="toggle-all">Mark all as complete</label>
-		<ul class="todo-list">
-			<!-- These are here just to show the structure of the list items -->
-			<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-			<li ng-repeat="todo in todos" ng-class="{completed:todo.status,editing:todo.editing}"
-				ng-dblclick="dbclick(todo)">
-				<div class="view">
-					<input class="toggle" type="checkbox" ng-model="todo.status">
-					<label>{{todo.task}}</label>
-					<button class="destroy" ng-click='remove(todo)'></button>
-				</div>
-				<input class="edit" ng-model="todo.task" ng-keypress="submit($event,todo)">
-			</li>
-		</ul>
+	<!--<h1>{{$location}}</h1>-->
+	<section class="todoapp">
+		<header class="header">
+			<h1>todos</h1>
+			<input class="new-todo" placeholder="What needs to be done?" autofocus ng-model="input" ng-keypress="add($event)">
+		</header>
+		<!-- This section should be hidden by default and shown when there are todos -->
+		<section class="main">
+			<input id="tga" class="toggle-all" type="checkbox" ng-model="checkAll" ng-change="toggle()">
+			<label for="tga"></label>
+			<ul class="todo-list">
+				<!-- These are here just to show the structure of the list items -->
+				<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+				<li ng-repeat="todo in todos | filter : selector" ng-class="{completed:todo.status,editing:todo.editing}" ng-dblclick="dbclick(todo)">
+					<div class="view">
+						<input class="toggle" type="checkbox" ng-model="todo.status">
+						<label>{{todo.task}}</label>
+						<button class="destroy" ng-click='remove(todo)'></button>
+					</div>
+					<input class="edit" ng-model="todo.task" ng-keypress="submit($event,todo)">
+				</li>
+			</ul>
+		</section>
+		<!-- This footer should hidden by default and shown when there are todos -->
+		<footer class="footer">
+			<!-- This should be `0 items left` by default -->
+			<span class="todo-count"><strong>{{getCount()}}</strong> item left</span>
+			<!-- Remove this if you don't implement routing -->
+			<ul class="filters">
+				<li>
+					<a ng-class="{selected:$location.hash()==='/' || $location.hash()===''}" href="#/">All</a>
+				</li>
+				<li>
+					<a ng-class="{selected:$location.hash()==='/active'}" href="#/active">Active</a>
+				</li>
+				<li>
+					<a ng-class="{selected:$location.hash()==='/completed'}" href="#/completed">Completed</a>
+				</li>
+			</ul>
+			<!-- Hidden if no completed items are left ↓ -->
+			<button class="clear-completed" ng-click="clear()" ng-show="show()">Clear completed</button>
+		</footer>
 	</section>
-	<!-- This footer should hidden by default and shown when there are todos -->
-	<footer class="footer">
-		<!-- This should be `0 items left` by default -->
-		<span class="todo-count"><strong>{{getCount()}}</strong> item left</span>
-		<!-- Remove this if you don't implement routing -->
-		<ul class="filters">
-			<li>
-				<a class="selected" href="#/">All</a>
-			</li>
-			<li>
-				<a href="#/active">Active</a>
-			</li>
-			<li>
-				<a href="#/completed">Completed</a>
-			</li>
-		</ul>
-		<!-- Hidden if no completed items are left ↓ -->
-		<button class="clear-completed" ng-click="clear()" ng-show="show()">Clear completed</button>
+	<footer class="info">
+		<p>Double-click to edit a todo</p>
+		<!-- Change this out with your name and url ↓ -->
+		<p>Created by <a href="http://todomvc.com">Neil</a></p>
+		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 	</footer>
-</section>
-<footer class="info">
-	<p>Double-click to edit a todo</p>
-	<!-- Remove the below line ↓ -->
-	<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
-	<!-- Change this out with your name and url ↓ -->
-	<p>Created by <a href="http://todomvc.com">you</a></p>
-	<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-</footer>
-<!-- Scripts here. Don't remove ↓ -->
-<script src="node_modules/todomvc-common/base.js"></script>
-<script src="bundle.js"></script>
+	<!-- Scripts here. Don't remove ↓ -->
+	<script src="node_modules/todomvc-common/base.js"></script>
+	<script src="bundle.js"></script>
 </body>
 
 </html>

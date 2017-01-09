@@ -9,10 +9,10 @@ function Todo(options) {
 }
 
 const app = angular.module('app', []);
-app.controller('MainController', ['$scope', function ($scope) {
+app.controller('MainController', ['$scope', '$location', function ($scope, $location) {
+	$scope.$location = $location;
 	$scope.checkAll = false;
 	$scope.input = '';
-	$scope.editingID = -1;
 	$scope.todos = [
 		new Todo({ id: 0, task: 'Buy a unicorn', status: false, editing: false }),
 		new Todo({ id: 1, task: 'Taste JavaScript', status: true, editing: false })
@@ -72,6 +72,24 @@ app.controller('MainController', ['$scope', function ($scope) {
 		this.todos.forEach((todo, index) => {
 			todo.status = this.checkAll;
 		});
+	};
+	$scope.selector = function (item, index, arr) {
+		switch ($location.hash()) {
+			case '/completed':
+				if (item.status) {
+					return item;
+				} else {
+					break;
+				}
+			case '/active':
+				if (!item.status) {
+					return item;
+				} else {
+					break;
+				}
+			default:
+				return item;
+		}
 	};
 }]);
 
